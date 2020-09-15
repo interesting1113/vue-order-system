@@ -37,7 +37,8 @@ export default {
 
 <style>
 #home {
-    background: url('../../assets/pexels-kenneth-carpina-1653877.jpg') center;
+    background: url('../../assets/pexels-kenneth-carpina-1653877.jpg') no-repeat center;
+    background-size: 1200px 700px;
     height: 85vh;
     padding: 10%;
 }

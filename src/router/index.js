@@ -13,34 +13,31 @@ import Delivery from '../components/about/sub/Delivery.vue'
 import History from '../components/about/sub/History.vue'
 import Guide from '../components/about/sub/Guide.vue'
 
+
+//三级路由
+import Phone from '../components/about/contact/Phone.vue'
+import PersonName from '../components/about/contact/PersonName.vue'
 Vue.use(Router)
 
 const router = new Router({
   routes: [
-    { path: '/', redirect:'/home', components: {
+    { path: '/', redirect:'/home'},
+    { path: '/home', name: 'Home', components: {
       default: Home,
       'guide': Guide,
       'delivery': Delivery,
       'history': History
-    } },
-    { path: '/home', name: 'Home', component: Home },
+    }  },
     { path: '/menu', name: 'Menu', component: Menu },
-    { path: '/admin', name: 'Admin', component: Admin, 
-      //beforeEnter: (to, from, next) => {
-      //路由独享守卫
-      //alert("非登录状态，不能访问此页面！");
-      //next(false);
-      //判断store。getters.isLogin === false
-      // if(to.path === '/login' || to.path === '/register') {
-      //   next();
-      // }else {
-      //   alert('还没有登陆，请先登录');
-      //   next('/login');
-      // } }
-  },
-    { path: '/about', name: 'About', component: About, 
+    { path: '/admin', name: 'Admin', component: Admin},
+    { path: '/about', name: 'About', redirect: '/contact', component: About, 
       children: [
-        {path: '/contact', name: 'Contact',component: Contact},
+        {path: '/contact', name: 'Contact',redirect: '/name', component: Contact,
+          children: [
+            {path: '/phone', name: 'PhoneNumber', component: Phone},
+            {path: '/name', name: 'PersonName', component: PersonName},
+          ]
+        },
         {path: '/history', name: 'History',component: History},
         {path: '/guide', name: 'Guide',component: Guide},
         {path: '/delivery', name: 'Delivery',component: Delivery}
